@@ -15,14 +15,14 @@ def myOpener(openbox):
     return None
 
 
-def canUnlockAll(aBox):
+def canUnlockAll(boxes):
     """Check if all abox can be opened
     Args:
         abox (list): List which contain all the abox with the keys
     Returns:
         bool: True if all abox can be opened, otherwise, False
     """
-    if len(aBox) <= 1 or aBox == [[]]:
+    if len(boxes) <= 1 or boxes == [[]]:
         return True
 
     xcs = {}
@@ -30,7 +30,7 @@ def canUnlockAll(aBox):
         if len(xcs) == 0:
             xcs[0] = {
                 'status': 'opened',
-                'keys': aBox[0],
+                'keys': boxes[0],
             }
         keys = myOpener(xcs)
         if keys:
@@ -41,18 +41,18 @@ def canUnlockAll(aBox):
                         continue
                     xcs[key] = {
                         'status': 'opened',
-                        'keys': aBox[key]
+                        'keys': boxes[key]
                     }
                 except (KeyError, IndexError):
                     continue
         elif 'opened' in [box.get('status') for box in xcs.values()]:
             continue
-        elif len(xcs) == len(aBox):
+        elif len(xcs) == len(boxes):
             break
         else:
             return False
 
-    return len(xcs) == len(aBox)
+    return len(xcs) == len(boxes)
 
 
 def main():
