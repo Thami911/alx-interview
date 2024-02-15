@@ -2,13 +2,13 @@
 
 const request = require('request');
 
-const MovieID = process.argv[2];
-const FilmEndPoint = 'https://swapi-api.hbtn.io/api/films/' + MovieID;
+const movieId = process.argv[2];
+const filmEndPoint = 'https://swapi-api.hbtn.io/api/films/' + movieId;
 let people = [];
 const names = [];
 
 const requestCharacters = async () => {
-  await new Promise(resolve => request(FilmEndPoint, (err, res, body) => {
+  await new Promise(resolve => request(filmEndPoint, (err, res, body) => {
     if (err || res.statusCode !== 200) {
       console.error('Error: ', err, '| StatusCode: ', res.statusCode);
     } else {
@@ -21,8 +21,8 @@ const requestCharacters = async () => {
 
 const requestNames = async () => {
   if (people.length > 0) {
-    for (const y of people) {
-      await new Promise(resolve => request(y, (err, res, body) => {
+    for (const p of people) {
+      await new Promise(resolve => request(p, (err, res, body) => {
         if (err || res.statusCode !== 200) {
           console.error('Error: ', err, '| StatusCode: ', res.statusCode);
         } else {
@@ -41,11 +41,11 @@ const getCharNames = async () => {
   await requestCharacters();
   await requestNames();
 
-  for (const x of names) {
-    if (x === names[names.length - 1]) {
-      process.stdout.write(x);
+  for (const n of names) {
+    if (n === names[names.length - 1]) {
+      process.stdout.write(n);
     } else {
-      process.stdout.write(x + '\n');
+      process.stdout.write(n + '\n');
     }
   }
 };
