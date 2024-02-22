@@ -8,17 +8,17 @@ def rotate_2d_matrix(matrix):
     left, right = 0, len(matrix) - 1
 
     while left < right:
-        for i in range(right - left):
+        for x in range(right - left):
             top, bottom = left, right
             # save topleft  value
-            topLeft = matrix[top][left + i]
+            topLeft = matrix[top][left + x]
             # move bottom left to top left
-            matrix[top][left + i] = matrix[bottom - i][left]
+            matrix[top][left + x] = matrix[bottom - x][left]
             # move bottom right to bottom left
-            matrix[bottom - i][left] = matrix[bottom][right - i]
+            matrix[bottom - x][left] = matrix[bottom][right - x]
             # move top right to bottom right
-            matrix[bottom][right - i] = matrix[top + i][right]
+            matrix[bottom][right - x] = matrix[top + x][right]
             # move top left to top right
-            matrix[top + i][right] = topLeft
+            matrix[top + x][right] = topLeft
         right -= 1
         left += 1
